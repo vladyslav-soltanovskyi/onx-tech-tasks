@@ -32,7 +32,6 @@ class RankingTable {
 
     $sortedPlayers = array_keys($this->players);
     
-    // return isset($sortedPlayers[$n - 1]) ?  : null;
     return $sortedPlayers[$n - 1];
   }
 }
