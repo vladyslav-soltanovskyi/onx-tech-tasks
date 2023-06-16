@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClientController;
 
 /*
@@ -20,5 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resources([
-    'clients' => ClientController::class
+    'clients' => ClientController::class,
+    'cars' => CarController::class
 ]);
+
+Route::controller(CarController::class)->group(function () {
+    Route::post('/cars/assign', 'assign');
+    Route::post('/cars/verify', 'verify');
+});
+

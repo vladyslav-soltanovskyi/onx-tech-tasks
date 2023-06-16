@@ -14,12 +14,16 @@ class Client extends Model
         'surname',
         'employee_id'
     ];
-    
+
     public function employee() {
         return $this->belongsTo(Employee::class);
     }
 
     public function orders() {
         return $this->hasMany(Order::class);
+    }
+
+    public function cars() {
+        return $this->belongsToMany(Car::class, 'client_cars');
     }
 }

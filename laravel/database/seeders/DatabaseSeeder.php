@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Car;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\Order;
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        Car::factory(10)->create();
         $products = Product::factory(10)->create();
         $employees = Employee::factory(3)->has(
             Client::factory(8)
@@ -49,6 +51,9 @@ class DatabaseSeeder extends Seeder
 
                     $order->orderedProducts()->save($orderedProduct);
                 }
+
+
+
             }
         }
         // \App\Models\User::factory()->create([
