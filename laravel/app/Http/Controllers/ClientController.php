@@ -13,10 +13,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::with([
-            'employee',
-            'orders'
-        ])->get();
+        $clients = Client::with(['employee'])->get();
 
         $data = [];
 
