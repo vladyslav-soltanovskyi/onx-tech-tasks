@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CarAssignedEvent;
 use App\Models\Car;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -91,12 +92,14 @@ class CarController extends Controller
         $clientId = $request->input('client_id');
         $carId = $request->input('car_id');
 
-        $user = Client::find($clientId);
+        $car = Car::find($carId);
+        $client = Client::find($clientId);
 
         $isUsed = $this->verify($request)['status'];
 
         if (!$isUsed) {
-            $user->cars()->attach($carId, ['start_time' => now()]);
+            $client->cars()->attach($carId, ['start_time' => now()]);
+            event(new CarAssignedEvent($client, $car));
         }
 
         return ['status' => !$isUsed];
@@ -107,10 +110,10 @@ class CarController extends Controller
         $clientId = $request->input('client_id');
         $carId = $request->input('car_id');
 
-        $user = Client::find($clientId);
+        $client = Client::find($clientId);
         $givenTime = now();
 
-        $usage = $user->cars()->where('car_id', $carId)
+        $usage = $client->cars()->where('car_id', $carId)
             ->where('start_time', '<=', $givenTime)
             ->where(function ($query) use ($givenTime) {
                 $query->where('end_time', '>=', $givenTime)

@@ -31,4 +31,3 @@ Route::controller(CarController::class)->group(function () {
     Route::post('/cars/assign', 'assign');
     Route::post('/cars/verify', 'verify');
 });
-
