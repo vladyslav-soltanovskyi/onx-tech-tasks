@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class ClientController extends Controller
 {
