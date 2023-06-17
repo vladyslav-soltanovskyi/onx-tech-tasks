@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resources([
     'clients' => ClientController::class,
-    'cars' => CarController::class
+    'cars' => CarController::class,
+    'employees' => EmployeeController::class
 ]);
 
 Route::controller(CarController::class)->group(function () {

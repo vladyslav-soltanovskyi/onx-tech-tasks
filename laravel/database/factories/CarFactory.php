@@ -17,7 +17,10 @@ class CarFactory extends Factory
     public function definition(): array
     {
         return [
-            'model' => fake()->name()
+            'model' => fake()->name(),
+            'brand' => fake()->company(),
+            'color' => fake()->colorName(),
+            'year' => rand(1996, 2023)
         ];
     }
 }

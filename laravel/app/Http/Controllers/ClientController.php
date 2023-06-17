@@ -12,7 +12,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::with(['employee'])->get();
+        $clients = Client::with(['employee', 'cars'])->get();
 
         $data = [];
 
@@ -44,7 +44,10 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requestData = $request->only(['name', 'surname', 'employee_id']);
+        $newClient = Client::create($requestData);
+
+        return response($newClient, 201);
     }
 
     /**
@@ -52,7 +55,13 @@ class ClientController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $client = Client::find($id);
+
+        if (!$client) {
+            return response(['message' => 'Client not Found'], 404);
+        }
+
+        return response($client);
     }
 
     /**
@@ -68,7 +77,20 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $requestData = $request->only(['name', 'surname', 'employee_id']);
+        $client = Client::find($id);
+
+        if (!$client) {
+            return response(['message' => 'Client not Found'], 404);
+        }
+
+        foreach ($requestData as $key => $data) {
+            $client->$key = $data;
+        }
+
+        $client->save();
+
+        return response($client);
     }
 
     /**
@@ -76,6 +98,14 @@ class ClientController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $client = Client::find($id);
+
+        if (!$client) {
+            return response(['message' => 'Client not Found'], 404);
+        }
+
+        $client->delete();
+
+        return response('', 204);
     }
 }

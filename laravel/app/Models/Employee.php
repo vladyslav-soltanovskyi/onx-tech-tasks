@@ -11,8 +11,7 @@ class Employee extends Model
 
     protected $fillable = [
         'name',
-        'surname',
-        'client_id'
+        'surname'
     ];
 
     public function clients() {

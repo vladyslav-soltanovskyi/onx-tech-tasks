@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
@@ -10,24 +11,20 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-
+    public function index()
+    {
+        return Car::all();
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $requestData = $request->only(['model', 'brand', 'color', 'year']);
+        $newCar = Car::create($requestData);
+
+        return response($newCar, 201);
     }
 
     /**
@@ -35,7 +32,13 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $car = Car::find($id);
+
+        if (!$car) {
+            return response(['message' => 'Car not Found'], 404);
+        }
+
+        return response($car);
     }
 
     /**
@@ -51,7 +54,20 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $requestData = $request->only(['model', 'brand', 'color', 'year']);
+        $car = Car::find($id);
+
+        if (!$car) {
+            return response(['message' => 'Car not Found'], 404);
+        }
+
+        foreach ($requestData as $key => $data) {
+            $car->$key = $data;
+        }
+
+        $car->save();
+
+        return response($car);
     }
 
     /**
@@ -59,10 +75,19 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $car = Car::find($id);
+
+        if (!$car) {
+            return response(['message' => 'Car not Found'], 404);
+        }
+
+        $car->delete();
+
+        return response('', 204);
     }
 
-    public function assign(Request $request) {
+    public function assign(Request $request)
+    {
         $clientId = $request->input('client_id');
         $carId = $request->input('car_id');
 
@@ -74,10 +99,11 @@ class CarController extends Controller
             $user->cars()->attach($carId, ['start_time' => now()]);
         }
 
-        return [ 'status' => !$isUsed ];
+        return ['status' => !$isUsed];
     }
 
-    public function verify(Request $request) {
+    public function verify(Request $request)
+    {
         $clientId = $request->input('client_id');
         $carId = $request->input('car_id');
 
@@ -92,6 +118,6 @@ class CarController extends Controller
             })
             ->exists();
 
-        return [ 'status' => !!$usage ];
+        return ['status' => !!$usage];
     }
 }
