@@ -20,7 +20,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $requestData = $request->only(['name', 'surname', 'employee_id']);
+        $requestData = $request->only(['name', 'surname', 'employee_id', 'email', 'address']);
         $newClient = Client::create($requestData);
 
         return response($newClient, 201);
@@ -55,7 +55,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $requestData = $request->only(['name', 'surname', 'employee_id']);
+        $requestData = $request->only(['name', 'surname', 'employee_id', 'email', 'address']);
         $client = Client::find($id);
 
         if (!$client) {

@@ -20,7 +20,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $requestData = $request->only(['name', 'surname']);
+        $requestData = $request->only(['name', 'surname', 'email']);
         $newEmployee = Employee::create($requestData);
 
         return response($newEmployee, 201);
@@ -45,7 +45,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $requestData = $request->only(['name', 'surname']);
+        $requestData = $request->only(['name', 'surname', 'email']);
         $employee = Employee::find($id);
 
         if (!$employee) {
