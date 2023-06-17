@@ -31,28 +31,31 @@ class DatabaseSeeder extends Seeder
             $clients = $employee->clients;
 
             foreach ($clients as $client) {
-                $order = Order::factory()->make(['client_id' => $client->id]);
-                $client->orders()->save($order);
+                $countOrderes = rand(1, 5);
 
-                $countOrderedProducts = rand(1, 4);
-                $countProducts = count($products) - 1;
-                $fromProduct = rand(0, $countProducts);
-                $fromProduct = ($fromProduct + $countOrderedProducts > $countProducts)
-                    ? $countProducts - $countOrderedProducts
-                    : $fromProduct;
+                for ($i = 0; $i < $countOrderes; $i++) {
+                    $order = Order::factory()->make(['client_id' => $client->id]);
+                    $client->orders()->save($order);
 
-                $randProducts = array_slice($products->toArray(), $fromProduct, $countOrderedProducts);
+                    $countOrderedProducts = rand(1, 4);
+                    $countProducts = count($products) - 1;
+                    $fromProduct = rand(0, $countProducts);
+                    $fromProduct = ($fromProduct + $countOrderedProducts > $countProducts)
+                        ? $countProducts - $countOrderedProducts
+                        : $fromProduct;
 
-                foreach ($randProducts as $product) {
-                    $orderedProduct = OrderedProduct::factory()->make([
-                        'order_id' => $order->id,
-                        'product_id' => $product['id']
-                    ]);
+                    $randProducts = array_slice($products->toArray(), $fromProduct, $countOrderedProducts);
 
-                    $order->orderedProducts()->save($orderedProduct);
+                    foreach ($randProducts as $product) {
+                        $orderedProduct = OrderedProduct::factory()->make([
+                            'order_id' => $order->id,
+                            'product_id' => $product['id']
+                        ]);
+
+                        $order->orderedProducts()->save($orderedProduct);
+                    }
+
                 }
-
-
 
             }
         }

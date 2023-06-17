@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class ClientController extends Controller
 {
@@ -12,9 +13,28 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return Client::with(['employee', 'orders.orderedProducts.product'])->get();
-    }
+        $clients = Client::with([
+            'employee',
+            'orders'
+        ])->get();
 
+        $data = [];
+
+        foreach ($clients as $client) {
+            $orders = $client->orders()
+                ->orderBy('created_at', 'desc')
+                ->with('orderedProducts.product')
+                ->limit(3)
+                ->get();
+
+            $client = $client->toArray();
+            $client['orders'] = $orders;
+
+            $data[] = $client;
+        }
+
+        return $data;
+    }
     /**
      * Show the form for creating a new resource.
      */
