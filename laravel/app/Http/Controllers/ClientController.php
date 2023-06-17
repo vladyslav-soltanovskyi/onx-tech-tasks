@@ -12,31 +12,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::with(['employee', 'cars'])->get();
-
-        $data = [];
-
-        foreach ($clients as $client) {
-            $orders = $client->orders()
-                ->orderBy('created_at', 'desc')
-                ->with('orderedProducts.product')
-                ->limit(3)
-                ->get();
-
-            $client = $client->toArray();
-            $client['orders'] = $orders;
-
-            $data[] = $client;
-        }
-
-        return $data;
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return Client::all();
     }
 
     /**
@@ -61,15 +37,17 @@ class ClientController extends Controller
             return response(['message' => 'Client not Found'], 404);
         }
 
-        return response($client);
-    }
+        $orders = $client->orders()
+                ->orderBy('created_at', 'desc')
+                ->with('orderedProducts.product')
+                ->limit(3)
+                ->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $client['cars'] = $client->cars;
+        $client['employee'] = $client->employee;
+        $client['orders'] = $orders;
+
+        return response($client, 200);
     }
 
     /**
