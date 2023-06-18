@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowJs": true,
+    "paths": {
+      "@enums/*": ["./src/common/enums/*"],
+      "@types-app/*": ["./src/common/types/*"],
+      "@common/*": ["./src/components/common/*"],
+      "@pages/*": ["./src/components/pages/*"],
+      "@views/*": ["./src/views/*"],
+      "@services/*": ["./src/services/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@plugins/*": ["./src/plugins/*"],
+      "@/*": ["./src/*"],
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
