@@ -2,8 +2,9 @@ import { ref, Ref } from "vue";
 import { GenericService } from "@services/generic";
 import { ICrudOptions } from "@types-app/crud";
 import { toastError, toastSuccess } from "@helpers/toast";
+import { errorCatch } from "@helpers/error-catch";
 
-const useCrud = <T extends object = {}, TOne = T, TCreate = T, TUpdate = Partial<TCreate>>({
+const useCrud = <T extends Record<string, any> = {}, TOne = T, TCreate = T, TUpdate = Partial<TCreate>>({
   name,
   url,
 }: ICrudOptions) => {
@@ -23,7 +24,8 @@ const useCrud = <T extends object = {}, TOne = T, TCreate = T, TUpdate = Partial
       const data = await genericService.fetchAll();
       items.value = data;
     } catch (err) {
-      toastError(`${name} fetchAll failed`);
+      const message = errorCatch(err);
+      toastError(message);
     } finally {
       isLoading.value = false;
     }
@@ -35,7 +37,8 @@ const useCrud = <T extends object = {}, TOne = T, TCreate = T, TUpdate = Partial
       const findedItem = await genericService.fetchOne(id);
       item.value = findedItem;
     } catch (err) {
-      toastError(`${name} fetch failed`);
+      const message = errorCatch(err);
+      toastError(message);
     } finally {
       isLoading.value = false;
     }
@@ -47,7 +50,8 @@ const useCrud = <T extends object = {}, TOne = T, TCreate = T, TUpdate = Partial
       await genericService.create(data);
       toastSuccess(`${name} successfully created`);
     } catch (err) {
-      toastError(`${name} create failed`);
+      const message = errorCatch(err);
+      toastError(message);
     } finally {
       isSending.value = false;
     }
@@ -56,10 +60,11 @@ const useCrud = <T extends object = {}, TOne = T, TCreate = T, TUpdate = Partial
   const updateItem = async (id: number, data: TUpdate) => {
     try {
       isSending.value = true;
-      await genericService.update(id, data);
+      item.value = await genericService.update(id, data);
       toastSuccess(`${name} successfully updated`);
     } catch (err) {
-      toastError(`${name} update failed`);
+      const message = errorCatch(err);
+      toastError(message);
     } finally {
       isSending.value = false;
     }
@@ -71,7 +76,8 @@ const useCrud = <T extends object = {}, TOne = T, TCreate = T, TUpdate = Partial
       await genericService.delete(id);
       toastSuccess(`${name} successfully deleted`);
     } catch (err) {
-      toastError(`${name} delete failed`);
+      const message = errorCatch(err);
+      toastError(message);
     } finally {
       isSending.value = false;
     }

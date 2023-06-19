@@ -25,4 +25,6 @@ interface IClientDetalis {
   orders: IOrder[];
 }
 
-export type { IClient, IClientDetalis };
+interface ICLientCreate extends Omit<IClient, 'id' | 'created_at'> {}
+
+export type { IClient, IClientDetalis, ICLientCreate };

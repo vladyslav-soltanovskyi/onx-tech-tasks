@@ -9,12 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@coreui/icons": "^3.0.1",
-    "@coreui/icons-vue": "^2.0.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/vue-fontawesome": "^3.0.3",
     "axios": "^1.4.0",
+    "vee-validate": "^4.9.6",
     "vue": "^3.2.47",
     "vue-router": "^4.2.2",
-    "vue-toast-notification": "^3.1.1"
+    "vue-toast-notification": "^3.1.1",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/node": "^20.3.1",

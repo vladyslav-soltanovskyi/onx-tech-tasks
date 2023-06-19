@@ -14,6 +14,7 @@
       "@helpers/*": ["./src/helpers/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@plugins/*": ["./src/plugins/*"],
+      "@validation-schemas/*": ["./src/validation-schemas/*"],
       "@/*": ["./src/*"],
     }
   },

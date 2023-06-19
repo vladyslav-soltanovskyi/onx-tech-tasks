@@ -11,6 +11,8 @@
               :item="item"
               :actions="actions"
               @on-open="(id, routeName) => emit('onOpen', id, routeName)"
+              @on-edit="(id, routeName) => emit('onEdit', id, routeName)"
+              @on-delete="(id) => emit('onDelete', id)"
             />
           </template>
         </TransitionGroup>
@@ -43,7 +45,7 @@ const emit = defineEmits<{ (e: ActionEmitType, id: number, routeName?: AppRouteN
 }
 
 .table {
-  @apply table-auto w-full;
+  @apply table-auto w-full block overflow-x-auto;
 
   &__head-row {
     @apply text-xs font-semibold uppercase text-gray-500 bg-gray-100;

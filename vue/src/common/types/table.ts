@@ -1,7 +1,8 @@
 import { AppRouteNames } from "@enums/route";
 import { VueIcons } from "./icon";
+import { ColorsEnum } from "@enums/colors";
 
-type ActionEmitType = "onOpen";
+type ActionEmitType = "onOpen" | "onEdit" | "onDelete";
 
 interface IAcitonEmiters {
   (e: ActionEmitType, id: number, routeName?: AppRouteNames): void;
@@ -13,6 +14,7 @@ interface IAction {
   iconName: VueIcons;
   emitName: ActionEmitType;
   actionKey: string;
+  color: ColorsEnum;
 }
 
 type TypeColumn = '' | 'actions';

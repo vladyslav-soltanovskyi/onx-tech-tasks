@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Back />
     <template v-if="isLoading">
       <Spinner />
     </template>
@@ -21,6 +22,7 @@ import { config } from './data';
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import Spinner from '@common/spinner/Spinner.vue';
+import Back from '@common/back/Back.vue';
 import NotFound from '@common/not-found/NotFound.vue';
 import ClientContent from './components/ClientContent.vue';
 

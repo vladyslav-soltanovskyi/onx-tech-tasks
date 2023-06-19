@@ -7,3 +7,5 @@ export type * from './ordered-product';
 export type * from './product';
 export type * from './table';
 export type * from './icon';
+export type * from './form';
+export type * from './generate-fom';

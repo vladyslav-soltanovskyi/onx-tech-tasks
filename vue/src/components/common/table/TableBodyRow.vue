@@ -7,6 +7,8 @@
             :item="item"
             :actions="actions"
             @on-open="(id, routeName) => emit('onOpen', id, routeName)"
+            @on-edit="(id, routeName) => emit('onEdit', id, routeName)"
+            @on-delete="(id) => emit('onDelete', id)"
           />
         </template>
 

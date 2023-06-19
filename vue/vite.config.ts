@@ -44,6 +44,10 @@ export default defineConfig({
         replacement: fileURLToPath(new URL('./src/plugins', import.meta.url))
       },
       {
+        find: '@validation-schemas',
+        replacement: fileURLToPath(new URL('./src/validation-schemas', import.meta.url))
+      },
+      {
         find: '@',
         replacement: fileURLToPath(new URL('./src', import.meta.url))
       },

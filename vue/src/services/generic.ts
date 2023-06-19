@@ -15,11 +15,7 @@ class GenericService<T = {}, TOne = T, TCreate = T, TUpdate = Partial<TCreate>>{
       const { data } = await axios.get(`${this._url}/`);
       return data;
     } catch (err) {
-      throw {
-        err,
-        error: true,
-        message: `${this._name} on fetch all something wrong`,
-      };
+      throw err;
     }
   }
 
@@ -28,11 +24,7 @@ class GenericService<T = {}, TOne = T, TCreate = T, TUpdate = Partial<TCreate>>{
       const { data } = await axios.get(`${this._url}/${id}`);
       return data;
     } catch (err) {
-      throw {
-        err,
-        error: true,
-        message: `${this._name} with fetchOne request something wrong`,
-      };
+      throw err;
     }
   }
 
@@ -41,11 +33,7 @@ class GenericService<T = {}, TOne = T, TCreate = T, TUpdate = Partial<TCreate>>{
       const { data } = await axios.post(`${this._url}/`, payload);
       return data;
     } catch (err) {
-      throw {
-        err,
-        error: true,
-        message: `${this._name} with create request something wrong`,
-      };
+      throw err;
     }
   }
 
@@ -54,11 +42,7 @@ class GenericService<T = {}, TOne = T, TCreate = T, TUpdate = Partial<TCreate>>{
       const { data } = await axios.put(`${this._url}/${id}`, payload);
       return data;
     } catch (err) {
-      throw {
-        err,
-        error: true,
-        message: `${this._name} with update request something wrong`,
-      };
+      throw err;
     }
   }
 
@@ -66,11 +50,7 @@ class GenericService<T = {}, TOne = T, TCreate = T, TUpdate = Partial<TCreate>>{
     try {
       await axios.delete(`${this._url}/${id}`);
     } catch (err) {
-      throw {
-        err,
-        error: true,
-        message: `${this._name} with delete request something wrong`,
-      };
+      throw err;
     }
   }
 }
