@@ -10,7 +10,7 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title'
+        'client_id'
     ];
 
     public function client() {
