@@ -14,7 +14,10 @@ class CarController extends Controller
      */
     public function index()
     {
-        return Car::all();
+        return response([
+            'total_items' => Car::count(),
+            'data' => Car::all()
+        ]);
     }
 
     /**

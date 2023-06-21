@@ -12,8 +12,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
-        return response($employees);
+        return response([
+            'total_items' => Employee::count(),
+            'data' => Employee::all()
+        ]);
     }
 
     /**
