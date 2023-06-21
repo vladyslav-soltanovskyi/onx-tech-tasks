@@ -16,7 +16,7 @@
 
 <style lang="scss" scoped>
 .overlay {
-  @apply fixed w-screen h-screen left-0 top-0 items-center;
+  @apply fixed w-screen h-screen left-0 top-0 items-center z-50;
 
   &::before {
     content: '';

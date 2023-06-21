@@ -44,7 +44,7 @@
       </div>
     </template>
     <div class="flex flex-row-reverse mt-4">
-      <Button type="submit" :disabled="isDisabledBtn || isSending">
+      <Button type="submit" :disabled="isDisabledBtn || !!isSending">
         {{ btnText ?? 'Confirm' }}
       </Button>
     </div>
@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { useForm } from 'vee-validate';
-import { IGenerateForm, TFieldValues, TypeField, TypeValidationMode } from '@types-app/index';
+import { IGenerateForm, TFieldValues, TypeField } from '@types-app/index';
 import Input from '@common/form-elements/input/Input.vue';
 import PasswordInput from '@common/form-elements/input/PasswordInput.vue';
 import Select from '@common/form-elements/select/Select.vue';
@@ -62,19 +62,12 @@ import Button from '@common/button/Button.vue';
 import { computed, reactive, ref, watch } from 'vue';
 import { getDefaultValues } from '@helpers/get-default-values';
 
-interface IGenerateFormProps {
-  validationSchema?: IGenerateForm['validationSchema'];
-  fields: IGenerateForm['fields'];
-  defaultValues?: IGenerateForm['defaultValues'];
-  btnText?: string;
-  isSending?: boolean;
-  mode?: TypeValidationMode;
-}
+interface IGenerateFormProps extends IGenerateForm {}
 
 const props = defineProps<IGenerateFormProps>();
 
 const emit = defineEmits<{
-  (e: 'on-submit', data: IGenerateFormProps['defaultValues'], resetForm: () => void): void;
+  (e: 'on-submit', data: TFieldValues, resetForm: () => void): void;
 }>();
 
 const isSubmitted = ref(false);

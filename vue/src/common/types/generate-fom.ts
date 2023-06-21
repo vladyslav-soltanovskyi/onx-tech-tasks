@@ -36,6 +36,9 @@ interface IGenerateForm {
   validationSchema?: ObjectSchema<TFieldValues> | Record<string, any>;
   fields: TypeField<TFieldValues>[];
   defaultValues?: TFieldValues;
+  btnText?: string;
+  isSending?: boolean;
+  mode?: TypeValidationMode;
 }
 
 export type {

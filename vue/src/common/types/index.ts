@@ -9,3 +9,4 @@ export type * from './table';
 export type * from './icon';
 export type * from './form';
 export type * from './generate-fom';
+export type * from './filter-query';

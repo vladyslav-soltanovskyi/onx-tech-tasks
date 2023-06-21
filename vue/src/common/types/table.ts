@@ -1,6 +1,7 @@
 import { AppRouteNames } from "@enums/route";
 import { VueIcons } from "./icon";
 import { ColorsEnum } from "@enums/colors";
+import { OrderBy } from "@enums/order-by";
 
 type ActionEmitType = "onOpen" | "onEdit" | "onDelete";
 
@@ -19,6 +20,8 @@ interface IAction {
 
 type TypeColumn = '' | 'actions';
 
+type TAvailableSorting = undefined | '' | OrderBy.ASC | OrderBy.DESC;
+
 interface IColumn {
   type?: TypeColumn;
   title?: string;
@@ -28,6 +31,7 @@ interface IColumn {
 type TableColumns = IColumn[];
 
 export type {
+  TAvailableSorting,
   ActionEmitType,
   IAcitonEmiters,
   IAction,

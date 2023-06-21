@@ -3,6 +3,7 @@ import { GenericService } from "@services/generic";
 import { ICrudOptions } from "@types-app/crud";
 import { toastError, toastSuccess } from "@helpers/toast";
 import { errorCatch } from "@helpers/error-catch";
+import { FilterQuery } from "@types-app/filter-query";
 
 const useCrud = <T extends Record<string, any> = {}, TOne = T, TCreate = T, TUpdate = Partial<TCreate>>({
   name,
@@ -12,17 +13,19 @@ const useCrud = <T extends Record<string, any> = {}, TOne = T, TCreate = T, TUpd
     name,
     url,
   });
-  
+
   const items = ref([]);
+  const totalItems = ref(0);
   const item = ref(null);
   const isLoading = ref(false);
   const isSending = ref(false);
 
-  const fetchAll = async () => {
+  const fetchAll = async (filterQuery?: FilterQuery<T>) => {
     try {
       isLoading.value = true;
-      const data = await genericService.fetchAll();
-      items.value = data;
+      const data = await genericService.fetchAll(filterQuery);
+      items.value = data.data;
+      totalItems.value = data.total_items;
     } catch (err) {
       const message = errorCatch(err);
       toastError(message);
@@ -86,6 +89,7 @@ const useCrud = <T extends Record<string, any> = {}, TOne = T, TCreate = T, TUpd
   return {
     items: items as Ref<T[]>,
     item: item as Ref<TOne>,
+    totalItems,
     isLoading,
     isSending,
     fetchAll,

@@ -3,4 +3,9 @@ interface ICrudOptions {
   url: string;
 }
 
-export type { ICrudOptions };
+interface TypeAllItemsDto<T> {
+  data: T[];
+  total_items: number;
+}
+
+export type { ICrudOptions, TypeAllItemsDto };

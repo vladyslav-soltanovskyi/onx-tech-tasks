@@ -15,8 +15,12 @@ import { computed, ref } from 'vue';
 import Input from './Input.vue';
 import type { IInputProps } from '@types-app/index';
 
-const emit = defineEmits(['update:value', 'onClickIcon'])
 const props = defineProps<IInputProps>();
+
+const emit = defineEmits<{
+  (e: 'on-click-icon'): void,
+  (e: 'update:value', value: string): void,
+}>();
 
 const { type = 'password', ...rest } = props;
 const isShowPassword = ref(false);

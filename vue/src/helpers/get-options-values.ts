@@ -5,7 +5,7 @@ const getOptionsValues = <T extends Record<string, any>, TId extends string = 'i
     const text = keys.reduce((str, key) => `${str as string} ` + `${item[key]}`, '');
     
     const option: IOption = {
-      value: item[idKey],
+      value: `${item[idKey]}`,
       text: text as string
     }
 

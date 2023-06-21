@@ -1,5 +1,5 @@
 import { ApiRoutes } from "@enums/api-routes";
-import { AppRouteNames, AppRoutes } from "@enums/route";
+import { AppRouteNames } from "@enums/route";
 import { ICLientCreate } from "@types-app/client";
 import { ICrudOptions } from "@types-app/crud";
 import { TypeField } from "@types-app/generate-fom";
@@ -32,6 +32,7 @@ const fields: TypeField<ICLientCreate>[] = [
     valueKey: 'email',
     label: 'Email',
     placeholder: 'Enter email',
+    readonly: true
   },
   {
     type: 'input',

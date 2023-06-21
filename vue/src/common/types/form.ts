@@ -9,7 +9,8 @@ interface IBaseFormElementProps {
   className?: string;
   name?: string;
   disabled?: boolean;
-  isRequired?: boolean; 
+  isRequired?: boolean;
+  readonly?: boolean;
 }
 
 interface IInputProps extends IBaseFormElementProps {
@@ -29,7 +30,6 @@ interface IOption {
 }
 
 interface ISelectProps extends IBaseFormElementProps {
-  rows?: number;
   options?: IOption[];
 }
 

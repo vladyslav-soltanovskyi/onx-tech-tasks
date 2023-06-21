@@ -1,24 +1,30 @@
 <template>
   <div :class="containerClassName ?? ''">
-    <label :for="name" class="label">
-      {{ label }}
-      <template v-if="isRequired">
-        <span class="text-red-600">*</span>
-      </template>
-    </label>
+    <template v-if="!!label">
+      <label :for="name" class="label">
+        {{ label }}
+        <template v-if="isRequired">
+          <span class="text-red-600">*</span>
+        </template>
+      </label>
+    </template>
     <div class="input__container">
       <input
         class="input"
         :id="name"
+        :ref="refCallback"
         :type="type"
         :name="name"
         :placeholder="placeholder"
         :class="inputClasses"
         :value="value"
-        @input="(e) => emit('update:value', (e.target as HTMLInputElement).value)"
+        :readonly="readonly"
+        @input="onChange"
+        @keydown="onKeyDown"
+        @blur="onBlur"
       >
       <template v-if="withIcon">
-        <button class="icon" :class="iconClassName" @click="emit('onClickIcon')">
+        <button class="icon" :class="iconClassName" @click="emit('on-click-icon')">
           <Icon :name="iconName" />
         </button>
       </template>
@@ -34,15 +40,29 @@ import Icon from '@common/icon/Icon.vue';
 import { computed } from 'vue';
 import type { IInputProps } from '@types-app/index';
 
-const emit = defineEmits(['update:value', 'onClickIcon'])
-const props = defineProps<IInputProps>();
+interface IInputPropsWithRef extends IInputProps {
+  refCallback?: (e: Element) => void;
+}
+
+const emit = defineEmits<{
+  (e: 'on-click-icon'): void,
+  (e: 'update:value', value: string): void,
+  (e: 'on-key-down', event: KeyboardEvent): void,
+  (e: 'on-blur', event: Event): void,
+}>();
+const props = defineProps<IInputPropsWithRef>();
 
 const inputClasses = computed(() => {
   return {
     'error': !!props.error,
-    'with-icon': !!props.withIcon
+    'with-icon': !!props.withIcon,
+    'readonly': !!props.readonly
   }
 });
+
+const onChange = (e: Event) => emit('update:value', (e.target as HTMLInputElement).value);
+const onKeyDown = (e: KeyboardEvent) => emit('on-key-down', e);
+const onBlur = (e: Event) => emit('on-blur', e);
 </script>
 
 <style lang="scss" scoped>
@@ -63,6 +83,10 @@ const inputClasses = computed(() => {
 
   &.with-icon {
     @apply pr-10; 
+  }
+
+  &.readonly, &:disabled {
+    @apply bg-neutral-100;
   }
 
   &__container {

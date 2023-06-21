@@ -1,15 +1,16 @@
 <template>
-  <div>
-    <Back />
+  <div class="max-w-[1000px] mx-auto px-2 py-4">
     <template v-if="isLoading">
       <Spinner />
     </template>
-
+    
     <template v-else-if="!!item">
+      <Back />
       <ClientContent :client="item" />
     </template>
 
     <template v-else>
+      <Back />
       <NotFound name="Client" />
     </template>
   </div>
