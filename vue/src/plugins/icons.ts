@@ -7,7 +7,8 @@ import {
   faChevronLeft,
   faChevronRight,
   faChevronDown,
-  faChevronUp
+  faChevronUp,
+  faRightFromBracket
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -19,7 +20,8 @@ const icons = {
   faChevronLeft,
   faChevronRight,
   faChevronDown,
-  faChevronUp
+  faChevronUp,
+  faRightFromBracket
 };
 
 library.add(icons);

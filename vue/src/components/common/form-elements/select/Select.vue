@@ -16,6 +16,7 @@
       :aria-readonly="readonly"
       :disabled="disabled"
       :placeholder="placeholder"
+      :autocomplete="autocomplete"
       @change="onSelect"
     >
       <template v-for="option in options" :key="option.value">

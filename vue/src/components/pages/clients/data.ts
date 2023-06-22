@@ -1,7 +1,5 @@
 import { ApiRoutes, AppRouteNames, ColorsEnum } from "@enums/index";
-import { ICrudOptions } from "@types-app/crud";
-import { IOption } from "@types-app/form";
-import { IAction, TableColumns } from "@types-app/table";
+import { ICrudOptions, IAction, TableColumns } from "@types-app/index";
 
 const config: ICrudOptions = {
   name: AppRouteNames.CLIENTS,
@@ -23,7 +21,7 @@ const actions: IAction[] = [
     actionKey: 'id',
     iconName: 'faPen',
     color: ColorsEnum.YELLOW,
-    routeName: AppRouteNames.CLIENT_EDIT
+    routeName: AppRouteNames.EDIT_CLIENT
   },
   {
     title: 'Delete',
@@ -61,39 +59,4 @@ const columns: TableColumns = [
   }
 ];
 
-const limitOptions: IOption[] = [
-  {
-    value: '5',
-    text: '5',
-  },
-  {
-    value: '10',
-    text: '10',
-  },
-  {
-    value: '20',
-    text: '20',
-  },
-  {
-    value: '50',
-    text: '50',
-  },
-  {
-    value: '100',
-    text: '100',
-  },
-  {
-    value: '200',
-    text: '200',
-  },
-  {
-    value: '500',
-    text: '500',
-  },
-  {
-    value: '1000',
-    text: '1000',
-  }
-]
-
-export { config, columns, actions, limitOptions };
+export { config, columns, actions };

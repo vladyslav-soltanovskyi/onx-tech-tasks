@@ -1,18 +1,13 @@
 import { ref, Ref } from "vue";
 import { GenericService } from "@services/generic";
-import { ICrudOptions } from "@types-app/crud";
-import { toastError, toastSuccess } from "@helpers/toast";
-import { errorCatch } from "@helpers/error-catch";
-import { FilterQuery } from "@types-app/filter-query";
+import { ICrudOptions, FilterQuery } from "@types-app/index";
+import { toastError, toastSuccess, errorCatch } from "@helpers/index";
 
 const useCrud = <T extends Record<string, any> = {}, TOne = T, TCreate = T, TUpdate = Partial<TCreate>>({
   name,
   url,
 }: ICrudOptions) => {
-  const genericService = new GenericService<T, TOne, TCreate, TUpdate>({
-    name,
-    url,
-  });
+  const genericService = new GenericService<T, TOne, TCreate, TUpdate>(url);
 
   const items = ref([]);
   const totalItems = ref(0);

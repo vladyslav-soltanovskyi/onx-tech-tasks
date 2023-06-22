@@ -1,12 +1,13 @@
 <template>
+  <Back />
   <CrudForm
+    btn-text="Edit"
+    title="Edit Client"
     :fields="fieldsRef"
     :validation-schema="clientSchema"
     :default-values="defaultValues"
     :is-sending="isSending"
     :is-loading="isLoading || isClientLoading"
-    btn-text="Edit"
-    title="Edit Client"
     @on-submit="handleSubmit"
   />
 </template>
@@ -17,10 +18,10 @@ import { computed, onMounted, reactive, watch } from 'vue';
 import { fields, clientsConfig, employeesConfig } from  './data';
 import { clientSchema } from '@validation-schemas/index';
 import { useCrud } from '@hooks/useCrud';
-import { IEmployee } from '@types-app/employee';
+import { IEmployee, ICLientCreate, IClient } from '@types-app/index';
 import { getOptionsValues } from '@helpers/get-options-values';
-import { ICLientCreate, IClient } from '@types-app/client';
 import CrudForm from '@common/crud-form/CrudForm.vue';
+import Back from '@common/back/Back.vue';
 
 const route = useRoute();
 const { items, fetchAll, isLoading } = useCrud<IEmployee>(employeesConfig);

@@ -24,7 +24,6 @@
 import { ActionEmitType, IAction, TableColumns } from "@types-app/index";
 import TableBodyCell from "./TableBodyCell.vue";
 import TableBodyActionCell from "./TableBodyActionCell.vue";
-import { AppRouteNames } from "@enums/route";
 
 interface ITableBodyRowProps {
   columns: TableColumns;
@@ -32,7 +31,7 @@ interface ITableBodyRowProps {
   item: object;
 }
 
-const emit = defineEmits<{ (e: ActionEmitType, id: number, routeName?: AppRouteNames): void; }>();
+const emit = defineEmits<{ (e: ActionEmitType, id: number, routeName?: string): void; }>();
 
 defineProps<ITableBodyRowProps>();
 </script>

@@ -28,23 +28,14 @@
 <script setup lang="ts">
 import TableHeadRow from "./TableHeadRow.vue";
 import TableBodyRow from "./TableBodyRow.vue";
-import { IAction, TableColumns, ActionEmitType } from "@types-app/index";
-import { AppRouteNames } from "@enums/route";
-import { TAvailableSorting } from "@types-app/index";
+import { ActionEmitType, TAvailableSorting, ITable } from "@types-app/index";
 
-interface ITableProps {
-  idKey: string;
-  columns: TableColumns;
-  items: object[];
-  actions?: IAction[];
-  sortBy?: string;
-  orderBy?: TAvailableSorting;
-}
+interface ITableProps extends ITable {}
 
 const { actions = [] } = defineProps<ITableProps>();
 
 const emit = defineEmits<{
-  (e: ActionEmitType, id: number, routeName?: AppRouteNames): void,
+  (e: ActionEmitType, id: number, routeName?: string): void,
   (e: 'sort-change', orderBy: TAvailableSorting, sortBy: string)
 }>();
 

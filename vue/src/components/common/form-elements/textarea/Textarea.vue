@@ -14,6 +14,7 @@
         :placeholder="placeholder"
         :class="inputClasses"
         :value="value"
+        :autocomplete="autocomplete"
         @input="(e) => emit('update:value', (e.target as HTMLInputElement).value)"
       />
     </div>

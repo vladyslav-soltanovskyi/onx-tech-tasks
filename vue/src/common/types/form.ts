@@ -11,6 +11,7 @@ interface IBaseFormElementProps {
   disabled?: boolean;
   isRequired?: boolean;
   readonly?: boolean;
+  autocomplete?: string;
 }
 
 interface IInputProps extends IBaseFormElementProps {

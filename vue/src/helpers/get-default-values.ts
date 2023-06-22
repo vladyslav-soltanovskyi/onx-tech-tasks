@@ -1,4 +1,4 @@
-const getDefaultValues = <T = {}, TKey extends string | number | symbol = keyof T>(
+const getDefaultValues = <T extends Record<string, any> = {}, TKey extends string | number | symbol = keyof T>(
   data: T | T[],
   key: TKey,
   defaultValue: unknown = ''
@@ -11,8 +11,9 @@ const getDefaultValues = <T = {}, TKey extends string | number | symbol = keyof 
     }, {} as Record<TKey, unknown>);;
   }
 
-  return data.reduce((obj) => {
-    obj[key] = defaultValue;
+  return data.reduce((obj, item) => {
+    const keyName = item[key as string];
+    obj[keyName] = defaultValue;
     return obj;
   }, {} as Record<TKey, unknown>);
 }

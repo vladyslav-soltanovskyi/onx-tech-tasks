@@ -24,6 +24,10 @@ export default defineConfig({
         replacement: fileURLToPath(new URL('./src/components/pages', import.meta.url))
       },
       {
+        find: '@layouts',
+        replacement: fileURLToPath(new URL('./src/components/layouts', import.meta.url))
+      },
+      {
         find: '@views',
         replacement: fileURLToPath(new URL('./src/views', import.meta.url))
       },
@@ -46,6 +50,10 @@ export default defineConfig({
       {
         find: '@validation-schemas',
         replacement: fileURLToPath(new URL('./src/validation-schemas', import.meta.url))
+      },
+      {
+        find: '@stores',
+        replacement: fileURLToPath(new URL('./src/stores', import.meta.url))
       },
       {
         find: '@',

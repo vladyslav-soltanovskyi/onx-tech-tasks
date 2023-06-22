@@ -19,12 +19,13 @@
         :class="inputClasses"
         :value="value"
         :readonly="readonly"
+        :autocomplete="autocomplete"
         @input="onChange"
         @keydown="onKeyDown"
         @blur="onBlur"
       >
       <template v-if="withIcon">
-        <button class="icon" :class="iconClassName" @click="emit('on-click-icon')">
+        <button type="button" class="icon" :class="iconClassName" @click="emit('on-click-icon')">
           <Icon :name="iconName" />
         </button>
       </template>

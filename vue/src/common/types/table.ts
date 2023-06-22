@@ -1,4 +1,3 @@
-import { AppRouteNames } from "@enums/route";
 import { VueIcons } from "./icon";
 import { ColorsEnum } from "@enums/colors";
 import { OrderBy } from "@enums/order-by";
@@ -6,12 +5,12 @@ import { OrderBy } from "@enums/order-by";
 type ActionEmitType = "onOpen" | "onEdit" | "onDelete";
 
 interface IAcitonEmiters {
-  (e: ActionEmitType, id: number, routeName?: AppRouteNames): void;
+  (e: ActionEmitType, id: number, routeName?: string): void;
 }
 
 interface IAction {
   title?: string;
-  routeName?: AppRouteNames;
+  routeName?: string;
   iconName: VueIcons;
   emitName: ActionEmitType;
   actionKey: string;
@@ -30,6 +29,15 @@ interface IColumn {
 
 type TableColumns = IColumn[];
 
+interface ITable {
+  idKey: string;
+  columns: TableColumns;
+  items: object[];
+  actions?: IAction[];
+  sortBy?: string;
+  orderBy?: TAvailableSorting;
+}
+
 export type {
   TAvailableSorting,
   ActionEmitType,
@@ -38,4 +46,5 @@ export type {
   TypeColumn,
   IColumn,
   TableColumns,
+  ITable
 };

@@ -1,6 +1,6 @@
 <template>
   <Input
-    v-bind="rest"
+    v-bind="props"
     :type="typeInput"
     :with-icon="true"
     :icon-name="iconName"
@@ -18,11 +18,9 @@ import type { IInputProps } from '@types-app/index';
 const props = defineProps<IInputProps>();
 
 const emit = defineEmits<{
-  (e: 'on-click-icon'): void,
   (e: 'update:value', value: string): void,
 }>();
 
-const { type = 'password', ...rest } = props;
 const isShowPassword = ref(false);
 
 const iconName = computed(() => {

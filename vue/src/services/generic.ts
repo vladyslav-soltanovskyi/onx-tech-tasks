@@ -1,14 +1,12 @@
 import { FilterQuery } from "@types-app/filter-query";
 import axios from "./request";
-import { ICrudOptions, TypeAllItemsDto } from "@types-app/index";
+import { TypeAllItemsDto } from "@types-app/index";
 
 class GenericService<T = {}, TOne = T, TCreate = T, TUpdate = Partial<TCreate>>{
   private _url: string;
-  private _name: string;
 
-  constructor({ url, name }: ICrudOptions) {
+  constructor(url: string) {
     this._url = url;
-    this._name = name;
   }
 
   async fetchAll(filterQuery?: FilterQuery<T>): Promise<TypeAllItemsDto<T>> {

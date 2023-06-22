@@ -1,11 +1,12 @@
 <template>
+  <Back />
   <CrudForm
+    btn-text="Create"
+    title="Create Client"
     :fields="fieldsRef"
     :validation-schema="clientSchema"
     :is-sending="isSending"
     :is-loading="isLoading"
-    btn-text="Create"
-    title="Create Client"
     @on-submit="handleSubmit"
   />
 </template>
@@ -14,11 +15,11 @@
 import { onMounted, reactive, watch } from 'vue';
 import { fields, clientsConfig, employeesConfig } from  './data';
 import { clientSchema } from '@validation-schemas/index';
-import { IEmployee } from '@types-app/employee';
+import { IEmployee, ICLientCreate } from '@types-app/index';
 import { getOptionsValues } from '@helpers/get-options-values';
-import { ICLientCreate } from '@types-app/client';
 import { useCrud } from '@hooks/useCrud';
 import CrudForm from '@common/crud-form/CrudForm.vue';
+import Back from '@common/back/Back.vue';
 
 const { items, fetchAll, isLoading } = useCrud<IEmployee>(employeesConfig);
 const { createItem, isSending } = useCrud<{}, {}, ICLientCreate>(clientsConfig);

@@ -19,9 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import { IClient } from '@types-app/client';
+import { IClient, IEmployee } from '@types-app/index';
 import { dateFormatter } from '@helpers/date-formatter';
-import { IEmployee } from '@types-app/employee';
 
 interface IClientDetalisProps extends IClient {
   employee: IEmployee;
