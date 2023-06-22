@@ -52,7 +52,7 @@ class ClientController extends Controller
 
         $items = $collection->get();
 
-        return response([
+        return response()->json([
             'total_items' => $totalItems,
             'data' => $items
         ]);
@@ -66,7 +66,7 @@ class ClientController extends Controller
         $requestData = $request->only(['name', 'surname', 'employee_id', 'email', 'address']);
         $newClient = Client::create($requestData);
 
-        return response($newClient, 201);
+        return response()->json($newClient, 201);
     }
 
     /**
@@ -77,7 +77,8 @@ class ClientController extends Controller
         $client = Client::find($id);
 
         if (!$client) {
-            return response(['message' => 'Client not Found'], 404);
+            return response()
+                ->json(['message' => 'Client not Found'], 404);
         }
 
         $orders = $client->orders()
@@ -90,7 +91,8 @@ class ClientController extends Controller
         $client['employee'] = $client->employee;
         $client['orders'] = $orders;
 
-        return response($client, 200);
+        return response()
+            ->json($client, 200);
     }
 
     /**
@@ -102,7 +104,8 @@ class ClientController extends Controller
         $client = Client::find($id);
 
         if (!$client) {
-            return response(['message' => 'Client not Found'], 404);
+            return response()
+                ->json(['message' => 'Client not Found'], 404);
         }
 
         foreach ($requestData as $key => $data) {
@@ -111,7 +114,8 @@ class ClientController extends Controller
 
         $client->save();
 
-        return response($client);
+        return response()
+            ->json($client);
     }
 
     /**
@@ -122,11 +126,13 @@ class ClientController extends Controller
         $client = Client::find($id);
 
         if (!$client) {
-            return response(['message' => 'Client not Found'], 404);
+            return response()
+                ->json(['message' => 'Client not Found'], 404);
         }
 
         $client->delete();
 
-        return response('', 204);
+        return response()
+            ->json(['message' => 'Client deleted successfully'], 204);
     }
 }

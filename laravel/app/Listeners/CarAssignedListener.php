@@ -24,7 +24,7 @@ class CarAssignedListener
      */
     public function handle(CarAssignedEvent $event): void
     {
-        $admins = User::where('role_id', 1)->get();
+        $admins = User::all();
 
         Notification::send($admins, new CarAssignedNotification($event->client, $event->car));
         $event->client->notify(new CarAssignedNotification($event->client, $event->car));

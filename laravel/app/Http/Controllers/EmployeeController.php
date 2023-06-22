@@ -12,7 +12,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return response([
+        return response()->json([
             'total_items' => Employee::count(),
             'data' => Employee::all()
         ]);
@@ -26,7 +26,8 @@ class EmployeeController extends Controller
         $requestData = $request->only(['name', 'surname', 'email']);
         $newEmployee = Employee::create($requestData);
 
-        return response($newEmployee, 201);
+        return response()
+            ->json($newEmployee, 201);
     }
 
     /**
@@ -37,10 +38,12 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
 
         if (!$employee) {
-            return response(['message' => 'Employee not Found'], 404);
+            return response()
+                ->json(['message' => 'Employee not Found'], 404);
         }
 
-        return response($employee);
+        return response()
+            ->json($employee);
     }
 
     /**
@@ -52,7 +55,8 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
 
         if (!$employee) {
-            return response(['message' => 'Employee not Found'], 404);
+            return response()
+                ->json(['message' => 'Employee not Found'], 404);
         }
 
         foreach ($requestData as $key => $data) {
@@ -61,7 +65,8 @@ class EmployeeController extends Controller
 
         $employee->save();
 
-        return response($employee);
+        return response()
+            ->json($employee);
     }
 
     /**
@@ -72,11 +77,12 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
 
         if (!$employee) {
-            return response(['message' => 'Employee not Found'], 404);
+            return response()
+                ->json(['message' => 'Employee not Found'], 404);
         }
 
         $employee->delete();
 
-        return response('', 204);
+        return response()->json('', 204);
     }
 }

@@ -24,7 +24,7 @@ class UserDeactivatedListener
      */
     public function handle(UserDeactivatedEvent $event): void
     {
-        $admins = User::where('role_id', 1)->get();
+        $admins = User::all();
 
         Notification::send($admins, new UserDeactivatedNotification($event->user));
     }

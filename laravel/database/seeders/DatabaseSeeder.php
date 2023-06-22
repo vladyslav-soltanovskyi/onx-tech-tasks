@@ -10,7 +10,6 @@ use App\Models\Employee;
 use App\Models\Order;
 use App\Models\OrderedProduct;
 use App\Models\Product;
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -61,17 +60,11 @@ class DatabaseSeeder extends Seeder
 
             }
         }
-        $role = Role::factory()->create([
-            'title' => 'Admin'
-        ]);
 
-        User::factory(3)->create([
-            'role_id' => $role->id
-        ]);
+        User::factory(3)->create();
 
         User::factory()->create([
-            'email' => 'admin@local.com',
-            'role_id' => $role->id
+            'email' => 'admin@local.com'
         ]);
     }
 }

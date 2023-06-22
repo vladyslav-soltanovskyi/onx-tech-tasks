@@ -14,7 +14,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        return response([
+        return response()->json([
             'total_items' => Car::count(),
             'data' => Car::all()
         ]);
@@ -28,7 +28,7 @@ class CarController extends Controller
         $requestData = $request->only(['model', 'brand', 'color', 'year']);
         $newCar = Car::create($requestData);
 
-        return response($newCar, 201);
+        return response()->json($newCar, 201);
     }
 
     /**
@@ -39,10 +39,10 @@ class CarController extends Controller
         $car = Car::find($id);
 
         if (!$car) {
-            return response(['message' => 'Car not Found'], 404);
+            return response()->json(['message' => 'Car not Found'], 404);
         }
 
-        return response($car);
+        return response()->json($car);
     }
 
     /**
@@ -54,7 +54,7 @@ class CarController extends Controller
         $car = Car::find($id);
 
         if (!$car) {
-            return response(['message' => 'Car not Found'], 404);
+            return response()->json(['message' => 'Car not Found'], 404);
         }
 
         foreach ($requestData as $key => $data) {
@@ -63,7 +63,7 @@ class CarController extends Controller
 
         $car->save();
 
-        return response($car);
+        return response()->json($car);
     }
 
     /**
@@ -74,12 +74,12 @@ class CarController extends Controller
         $car = Car::find($id);
 
         if (!$car) {
-            return response(['message' => 'Car not Found'], 404);
+            return response()->json(['message' => 'Car not Found'], 404);
         }
 
         $car->delete();
 
-        return response('', 204);
+        return response()->json('', 204);
     }
 
     public function assign(Request $request)
@@ -97,7 +97,7 @@ class CarController extends Controller
             event(new CarAssignedEvent($client, $car));
         }
 
-        return ['status' => !$isUsed];
+        return response()->json(['status' => !$isUsed]);
     }
 
     public function verify(Request $request)

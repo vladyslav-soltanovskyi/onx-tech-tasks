@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
@@ -30,4 +31,11 @@ Route::resources([
 Route::controller(CarController::class)->group(function () {
     Route::post('/cars/assign', 'assign');
     Route::post('/cars/verify', 'verify');
+});
+
+Route::controller(AuthController::class)->group(function () {
+    Route::post('/sign-in', 'signIn');
+    Route::post('/sign-up', 'signUp');
+    Route::post('/sign-out', 'signOut');
+    Route::get('/current-user', 'getUser');
 });
